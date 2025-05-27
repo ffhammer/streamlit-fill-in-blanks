@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Streamlit, withStreamlitConnection } from "streamlit-component-lib";
 import { DndContext } from "@dnd-kit/core";
 import { Draggable } from "./Draggable";
 import { Droppable } from "./Droppable";
@@ -43,22 +42,24 @@ function FillInBlanks({ segments, options, theme, onChange }) {
           >
             {row.map((text, ci) => (
               <React.Fragment key={ci}>
-                <div
-                  style={{
-                    backgroundColor: currentTheme.secondaryBackgroundColor,
-                    color: currentTheme.textColor,
-                    padding: "6px 10px",
-                    borderRadius: 8,
-                    fontFamily: currentTheme.font,
-                  }}
-                >
-                  {text}
-                </div>
+                {!(text === "" && ci === row.length - 1) && (
+                  <div
+                    style={{
+                      backgroundColor: currentTheme.secondaryBackgroundColor,
+                      color: currentTheme.textColor,
+                      padding: "6px 10px",
+                      borderRadius: 8,
+                      fontFamily: currentTheme.font,
+                    }}
+                  >
+                    {text}
+                  </div>
+                )}
                 {ci < row.length - 1 && (
                   <Droppable id={`${ri}-${ci}`} theme={currentTheme}>
-                    {placed[ri][ci] && (
+                    {placed[ri] && placed[ri][ci] && ( 
                       <Draggable id={placed[ri][ci]} theme={currentTheme}>
-                        {options.find(o => o.id === placed[ri][ci]).label}
+                        {options.find(o => o.id === placed[ri][ci])?.label} 
                       </Draggable>
                     )}
                   </Droppable>
@@ -69,7 +70,7 @@ function FillInBlanks({ segments, options, theme, onChange }) {
         ))}
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap", justifyContent: "center" }}>
           {options
-            .filter(o => !placed.some(r => Object.values(r).includes(o.id)))
+            .filter(o => !placed.some(r => r && Object.values(r).includes(o.id))) 
             .map(o => (
               <Draggable key={o.id} id={o.id} theme={currentTheme}>
                 {o.label}
