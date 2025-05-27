@@ -39,6 +39,8 @@ Have a look at the [example.](example.py)
 ## API Reference
 
 ```python
+from fill_in_blanks_component import fill_in_blanks
+
 def fill_in_blanks(
     segments_data: List[Union[List[str], str]],
     options: List[Dict[str, str]],
