@@ -85,10 +85,10 @@ def fill_in_blanks(
 
     Returns
     -------
-    dict
-        A dictionary representing the placed items in the blanks.
-        e.g. {0: {0: "played", 1: "enjoyed"}, 1: {0: "play"}}
-        Outer key is row index (int), inner key is blank index (int) within the row.
+    List[Dict[int, str]]
+            A list of dictionaries, one per sentence row.
+            Each dictionary maps blank positions (int) to selected option ids (str).
+            Example: [{0: "paris", 1: "france"}]
     """
     processed_segments: List[List[str]]
 
