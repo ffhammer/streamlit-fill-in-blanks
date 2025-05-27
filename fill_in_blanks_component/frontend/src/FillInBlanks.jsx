@@ -3,7 +3,7 @@ import { DndContext } from "@dnd-kit/core";
 import { Draggable } from "./Draggable";
 import { Droppable } from "./Droppable";
 
-function FillInBlanks({ segments, options, theme, onChange }) {
+function FillInBlanks({ segments, options, theme, onChange, freeze }) {
   const currentTheme = theme || {
     primaryColor: 'orange',
     secondaryBackgroundColor: '#f0f2f6',
@@ -18,7 +18,9 @@ function FillInBlanks({ segments, options, theme, onChange }) {
  useEffect(() => {
     onChange(placed);
   }, [placed, onChange])
+
   function handleDragEnd({ active, over }) {
+    if (freeze) return; // If frozen, do nothing
     setPlaced(p => {
       const next = p.map(r => ({ ...r }));
       next.forEach(r => {
@@ -58,7 +60,7 @@ function FillInBlanks({ segments, options, theme, onChange }) {
                 {ci < row.length - 1 && (
                   <Droppable id={`${ri}-${ci}`} theme={currentTheme}>
                     {placed[ri] && placed[ri][ci] && ( 
-                      <Draggable id={placed[ri][ci]} theme={currentTheme}>
+                      <Draggable id={placed[ri][ci]} theme={currentTheme} freeze={freeze}>
                         {options.find(o => o.id === placed[ri][ci])?.label} 
                       </Draggable>
                     )}
@@ -72,7 +74,7 @@ function FillInBlanks({ segments, options, theme, onChange }) {
           {options
             .filter(o => !placed.some(r => r && Object.values(r).includes(o.id))) 
             .map(o => (
-              <Draggable key={o.id} id={o.id} theme={currentTheme}>
+              <Draggable key={o.id} id={o.id} theme={currentTheme} freeze={freeze}>
                 {o.label}
               </Draggable>
             ))}

@@ -54,6 +54,7 @@ def fill_in_blanks(
     delimiter: str = "$",
     theme: Dict[str, str] = None,
     assert_enough_options: bool = True,  # New parameter
+    freeze: bool = True,  # New parameter
     key: str = None,
 ) -> List[Dict[int, str]]:  # Corrected return type hint to match previous logic
     """
@@ -80,6 +81,9 @@ def fill_in_blanks(
     assert_enough_options : bool, optional
         If True (default), raises a ValueError if the number of blanks
         exceeds the number of available options.
+    freeze : bool, optional
+        If True (default: False), disables dragging and dropping functionality.
+        The current state remains visible and is returned.
     key : str, optional
         Streamlit key for the component.
 
@@ -118,6 +122,7 @@ def fill_in_blanks(
         segments=processed_segments,  # Pass the processed segments
         options=options,
         theme=theme,
+        freeze=freeze,  # Pass freeze parameter
         key=key,
         default={},
     )

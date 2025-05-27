@@ -47,6 +47,7 @@ def fill_in_blanks(
     delimiter: str = "$",
     theme: Optional[Dict[str, str]] = None,
     assert_enough_options: bool = True,
+    freeze: bool = False,
     key: Optional[str] = None,
 ) -> Dict[int, Dict[int, str]]:
 ```
@@ -69,6 +70,8 @@ def fill_in_blanks(
   - A dictionary to customize appearance. Keys: `primaryColor`, `secondaryBackgroundColor`, `textColor`, `font`. If None, Streamlit's current theme is used.
 - `assert_enough_options`: `bool`, optional (default: True)
   - If True, raises a ValueError if the total number of blanks across all sentences is greater than the number of unique options provided. Set to False to allow more blanks than options.
+- `freeze`: `bool`, optional (default: `False`)
+  - If `True`, the component becomes non-interactive. Users cannot drag or drop options. The current state of placed options remains visible and is returned.
 - `key`: `str`, optional (default: None)
   - A unique Streamlit key for the component instance.
 

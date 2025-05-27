@@ -40,7 +40,6 @@ st.json(options_data)
 value_delimiter = fill_in_blanks(
     sentences_with_delimiters, options_data, key="fib_delimiter"
 )
-print(value_delimiter)
 st.write("Returned value (Delimiter-based):")
 st.json(value_delimiter)
 st.markdown("---")
@@ -92,3 +91,48 @@ value_pre_segmented = fill_in_blanks(
 )
 st.write("Returned value (Pre-segmented):")
 st.json(value_pre_segmented)
+st.markdown("---")
+
+# --- Example 4: Demonstrating the freeze functionality ---
+st.write("### Component with Freeze Functionality")
+
+# Use session state to keep track of the freeze toggle
+if "freeze_example_4" not in st.session_state:
+    st.session_state.freeze_example_4 = False
+
+freeze_active = st.checkbox(
+    "Freeze Component",
+    key="freeze_checkbox_example_4",
+    value=st.session_state.freeze_example_4,
+)
+st.session_state.freeze_example_4 = freeze_active
+
+
+sentences_for_freeze_example = [
+    "This component can be $ by toggling the checkbox above.",
+    "When frozen, you cannot $ or $ new options.",
+]
+options_for_freeze_example = [
+    {"id": "frozen", "label": "frozen"},
+    {"id": "drag", "label": "drag"},
+    {"id": "drop", "label": "drop"},
+    {"id": "active", "label": "active"},
+]
+
+st.write("#### Inputs")
+st.write("Sentences:")
+st.json(sentences_for_freeze_example)
+st.write("Options:")
+st.json(options_for_freeze_example)
+
+
+value_freeze_example = fill_in_blanks(
+    sentences_for_freeze_example,
+    options_for_freeze_example,
+    freeze=st.session_state.freeze_example_4,
+    key="fib_freeze_example",
+)
+
+st.write("Returned value (Freeze Example):")
+st.json(value_freeze_example)
+st.markdown("---")
