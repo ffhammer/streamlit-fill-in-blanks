@@ -44,7 +44,8 @@ function FillInBlanks({ segments, options, theme, onChange, freeze }) {
           >
             {row.map((text, ci) => (
               <React.Fragment key={ci}>
-                {!(text === "" && ci === row.length - 1) && (
+                {/* Only render the div if text is not empty */}
+                {text !== "" && !(text === "" && ci === row.length - 1) && (
                   <div
                     style={{
                       backgroundColor: currentTheme.secondaryBackgroundColor,

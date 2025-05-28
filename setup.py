@@ -6,7 +6,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setuptools.setup(
     name="streamlit-fill-in-blanks",
-    version="0.1.2",
+    version="0.1.3",
     author="Felix Hammer",
     author_email="fhammer@uos.de",
     description="Streamlit component for fill-in-the-blanks exercises",

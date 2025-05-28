@@ -25,8 +25,9 @@ custom_theme = {
 
 # --- Example 1: Using the new delimiter-based input ---
 sentences_with_delimiters = [
-    "Yesterday I $ playing football and I $ it very much$.",  # Blank at the end
-    "Nice I love to $ football as well.",
+    "$$$$",
+    # "Yesterday I $ playing football and I $ it very much$.",  # Blank at the end
+    # "Nice I love to $ football as well.",
     "The quick brown $ jumps over the lazy $.",
     "Only a blank: $",
 ]

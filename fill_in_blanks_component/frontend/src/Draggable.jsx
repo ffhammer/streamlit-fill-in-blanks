@@ -1,10 +1,7 @@
 import {useDraggable} from '@dnd-kit/core';
 
-export function Draggable({id, children, theme, freeze}) {
-  const {attributes, listeners, setNodeRef, transform} = useDraggable({
-    id,
-    disabled: freeze, // Disable dnd-kit draggable if frozen
-  });
+export function Draggable({id, children, theme}) {
+  const {attributes, listeners, setNodeRef, transform} = useDraggable({id});
 
   const currentTheme = theme || {
     primaryColor: 'orange',
@@ -24,16 +21,12 @@ export function Draggable({id, children, theme, freeze}) {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    cursor: freeze ? 'default' : 'grab', // Change cursor if frozen
+    cursor: 'grab',
     touchAction: 'none', // Recommended for better mobile dragging
-    opacity: freeze ? 0.7 : 1, // Optionally make it look a bit disabled
   };
-  
-  // Conditionally apply listeners and attributes
-  const dragHandlers = freeze ? {} : {...listeners, ...attributes};
 
   return (
-    <button ref={setNodeRef} style={style} {...dragHandlers}>
+    <button ref={setNodeRef} style={style} {...listeners} {...attributes}>
       {children}
     </button>
   );

@@ -1,10 +1,7 @@
-# In fill_in_blanks_component/__init__.py
-
 import os
 import streamlit.components.v1 as components
-from typing import List, Dict, Any  # Added for type hinting
+from typing import List, Dict
 
-# --- (Keep your _RELEASE and _component_func declaration as is) ---
 _RELEASE = True
 
 if not _RELEASE:
@@ -49,14 +46,14 @@ def _parse_sentences_with_delimiter(
 
 
 def fill_in_blanks(
-    segments_data: List[Any],  # Can be List[List[str]] or List[str]
+    segments_data: List[List[str]] | List[str],
     options: List[Dict[str, str]],
     delimiter: str = "$",
     theme: Dict[str, str] = None,
-    assert_enough_options: bool = True,  # New parameter
-    freeze: bool = True,  # New parameter
+    assert_enough_options: bool = True,
+    freeze: bool = False,
     key: str = None,
-) -> List[Dict[int, str]]:  # Corrected return type hint to match previous logic
+) -> List[Dict[int, str]]:
     """
     Streamlit component to render a fill-in-the-blanks exercise.
 
